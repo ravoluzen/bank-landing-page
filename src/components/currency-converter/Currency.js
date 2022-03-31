@@ -1,20 +1,29 @@
 import PropTypes from "prop-types";
 
-
-function CurrencyInput(props) {
+const Currency = (props) => {
   return (
-    <div className="group">
-      <input type="text" value={props.amount} onChange={ev => props.onAmountChange(ev.target.value)} />
-      <select value={props.currency} onChange={ev => props.onCurrencyChange(ev.target.value)}>
+    <div className="group shadow-md rounded p-4">
+      <input 
+      type="text" 
+      value={props.amount} 
+      onChange={ev => props.onAmountChange(ev.target.value)}
+      className="bg-slate-200" 
+      />
+
+      <select 
+      value={props.currency} 
+      onChange={ev => props.onCurrencyChange(ev.target.value)}
+      className="bg-slate-200"
+      >
         {props.currencies.map((currency => (
-          <option value={currency}>{currency}</option>
+          <option key={currency} value={currency}>{currency}</option>
         )))}
       </select>
     </div>
   );
 }
 
-CurrencyInput.propTypes = {
+Currency.propTypes = {
   amount: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
   currencies: PropTypes.array,
@@ -22,4 +31,4 @@ CurrencyInput.propTypes = {
   onCurrencyChange: PropTypes.func,
 };
 
-export default CurrencyInput;
+export default Currency;

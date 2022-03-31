@@ -1,8 +1,8 @@
 import Currency from "./Currency";
 import {useState, useEffect} from "react";
+import axios from "axios";
 
-
-function CurrencyConverter() {
+const CurrencyConverter = () => {
 
   const [amount1, setAmount1] = useState(1);
   const [amount2, setAmount2] = useState(1);
@@ -10,18 +10,23 @@ function CurrencyConverter() {
   const [currency2, setCurrency2] = useState('EUR');
   const [rates, setRates] = useState([]);
 
+
   useEffect(() => {
-    fetch('http://data.fixer.io/api/latest?access_key=0ce522574c9b9c51f85813161ed6c284')
+    axios.get('http://data.fixer.io/api/latest?access_key=fc27d49a2f58b8de29cb1376757c65eb')
       .then(response => {
         setRates(response.data.rates);
       })
   }, []);
 
+
   useEffect(() => {
     if (!!rates) {
+
       function init() {
         handleAmount1Change(1);
+
       }
+
       init();
     }
   }, [rates]);
@@ -54,22 +59,37 @@ function CurrencyConverter() {
 
 
   return (
-    <div>
-      <h1>Currency Converter</h1>
-      <Currency
-        onAmountChange={handleAmount1Change}
-        onCurrencyChange={handleCurrency1Change}
-        currencies={Object.keys(rates)}
-        amount={amount1}
-        currency={currency1} />
-      <Currency
-        onAmountChange={handleAmount2Change}
-        onCurrencyChange={handleCurrency2Change}
-        currencies={Object.keys(rates)}
-        amount={amount2}
-        currency={currency2} />
+    <div className="p-8 flex flex-col justify-around items-center bg-slate-200 lg:p-32 lg:flex-row lg:text-left lg:-mt-24">
+
+        <article className="w-full mb-12 lg:w-2/5">
+            <h1 className="mb-8 text-2xl font-bold text-slate-900 lg:text-4xl">Deal in multiple currencies.</h1>
+
+            <p className="mb-8 text-md text-slate-700 lg:text-xl">
+                Our banking experience provides seamless services over all the popular currencies and more. You never have to worry about exchanges while transacting.
+            </p>
+        </article>
+
+        <section className="lg:-mt-16">
+            <h2 className="mb-8 text-xl text-slate-900 lg:text-2xl">Convert Currencies</h2>
+
+            <Currency
+                onAmountChange={handleAmount1Change}
+                onCurrencyChange={handleCurrency1Change}
+                currencies={Object.keys(rates)}
+                amount={amount1}
+                currency={currency1} 
+            />
+
+            <Currency
+                onAmountChange={handleAmount2Change}
+                onCurrencyChange={handleCurrency2Change}
+                currencies={Object.keys(rates)}
+                amount={amount2}
+                currency={currency2} 
+            />
+        </section>
     </div>
   );
 }
 
-export default CurrencyConverter
+export default CurrencyConverter;

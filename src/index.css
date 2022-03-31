@@ -17,3 +17,10 @@ html, body{
     background-position:300%;
     background-repeat: no-repeat;
 }
+
+@media screen and (max-width:768px){
+    #home {
+        background-image: url('./images/bg-intro-mobile.svg');
+        background-position:top;
+    }
+}
