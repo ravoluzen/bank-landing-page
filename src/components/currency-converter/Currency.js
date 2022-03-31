@@ -23,12 +23,5 @@ const Currency = (props) => {
   );
 }
 
-Currency.propTypes = {
-  amount: PropTypes.number.isRequired,
-  currency: PropTypes.string.isRequired,
-  currencies: PropTypes.array,
-  onAmountChange: PropTypes.func,
-  onCurrencyChange: PropTypes.func,
-};
 
 export default Currency;

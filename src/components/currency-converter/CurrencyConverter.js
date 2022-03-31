@@ -12,7 +12,7 @@ const CurrencyConverter = () => {
 
 
   useEffect(() => {
-    axios.get('https://api.exchangeratesapi.io/v1/latest?access_key=fc27d49a2f58b8de29cb1376757c65eb')
+    axios.get('http://data.fixer.io/api/latest?access_key=fc27d49a2f58b8de29cb1376757c65eb')
       .then(response => {
         setRates(response.data.rates);
       })
